@@ -7,7 +7,7 @@ use WWW::Mechanize;
 use HTML::TokeParser;
 use URI;
 
-our $VERSION = '0.06';
+our $VERSION = '0.07';
 
 __PACKAGE__->mk_accessors(qw/mech error/);
 
@@ -46,7 +46,7 @@ sub new {
     $self->mech(
         do {
             my $mech = WWW::Mechanize->new;
-            $mech->agent_alias('Windows IE 6');
+            $mech->agent_alias('Linux Mozilla');
 
             $mech;
         }
@@ -99,6 +99,7 @@ sub parse_html {
 
         $p->get_tag('h2');
         $res = $p->get_trimmed_text('/h2');
+        return $res; # stop searching here
     }
 
     $res;
